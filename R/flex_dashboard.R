@@ -317,11 +317,11 @@ flex_dashboard <- function(fig_width = 6.0,
         if (fill_page) readLines(resource("fillpage.css")),
         '</style>'
       )
-      dashboardCssFile <- tempfile(fileext = ".html")
+      dashboardCssFile <- "/tmp/shiny_tmp/html_output/css.html"
       writeLines(dashboardCss, dashboardCssFile)
       includes$in_header <- c(includes$in_header, dashboardCssFile)
 
-      dashboardScriptFile <- tempfile(fileext = ".html")
+      dashboardScriptFile <- "/tmp/shiny_tmp/html_output/script.html"
       dashboardScript <- c('<script type="text/javascript">', readLines(resource("flexdashboard.js")), '</script>')
       writeLines(dashboardScript, dashboardScriptFile)
       includes$before_body <- c(includes$before_body, dashboardScriptFile)
@@ -367,7 +367,7 @@ flex_dashboard <- function(fig_width = 6.0,
        '});',
        '</script>'
     )
-    dashboardInitScriptFile <- tempfile(fileext = ".html")
+    dashboardInitScriptFile <- "/tmp/shiny_tmp/html_output/init.html"
     writeLines(dashboardInitScript, dashboardInitScriptFile)
     includes$after_body <- c(includes$after_body, dashboardInitScriptFile)
 
@@ -491,7 +491,7 @@ mobile_figure_args <- function(mobile_figures) {
         '<img class="mobile-figure" data-mobile-figure-id=', id,
         ' src="', mobile_figures[[id]] ,'" />'))
     }
-    figuresFile <- tempfile(fileext = ".html")
+    figuresFile <- "/tmp/shiny_tmp/html_output/figures.html"
     writeLines(figures, figuresFile)
     pandoc_include_args(before_body = figuresFile)
   } else {
@@ -527,7 +527,7 @@ source_code_embed_args <- function(source_file) {
       '</div>'
     )
 
-    codeFile <- tempfile(fileext = ".html")
+    codeFile <- "/tmp/shiny_tmp/html_output/code.html"
     writeLines(codeDiv, codeFile)
     pandoc_include_args(after_body = codeFile)
   } else {
